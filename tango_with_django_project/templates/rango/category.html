@@ -1,0 +1,25 @@
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ category.name }}
+{% endblock title_block %}
+
+{% block body_block %}
+    <div>
+        {% if category %}
+            <h1>{{ category.name }}</h1>
+            {% if pages %}
+                <ul>
+                    {% for page in pages %}
+                        <li><a target=_blank href="{{ page.url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <strong>Não há páginas atualmente nessa categoria.</strong>
+            {% endif %}
+        {% else %}
+            A categoria especificada não existe.
+        {% endif %}
+    </div>
+    <a href="{% url 'add_page' category.slug %}">Adicionar página em {{ category.name }}</a> <br/>
+{% endblock body_block %}
